@@ -30,3 +30,22 @@ Our iOS system will recommend workouts based upon the user’s meal history, phy
 * Integrate the HealthKit API to track users’ daily activity and sleep schedule.
 * Connect the frontend with backend components.
 * Develop workout recommendation algorithms based on meals, activity and sleep. This step needs to implement a ML/AI algorithm.
+
+**Login Screen**
+<img width="436" alt="Login" src="https://github.com/Vini251/FlexiFit/assets/80379653/cd861764-e36b-456e-b79d-def51a4a58d2">
+
+**Dashboard:**
+<img width="436" alt="Dashboard" src="https://github.com/Vini251/FlexiFit/assets/80379653/c845d777-1eea-4c4e-9146-8287692dda8e">
+
+**Meal:**
+<img width="436" alt="Meal" src="https://github.com/Vini251/FlexiFit/assets/80379653/c0e5bb4f-a12c-4b2e-8761-033e3cc0bccc">
+
+**Profile:**
+<img width="436" alt="Profile" src="https://github.com/Vini251/FlexiFit/assets/80379653/63fe2b00-180b-4a00-be74-0f354cfe2772">
+
+
+
+
+
+
+
