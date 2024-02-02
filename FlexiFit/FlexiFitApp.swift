@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct FlexiFitApp: App {
+    @State private var isLoggedIn = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isLoggedIn {
+                ContentView()
+            } else {
+                LoginView(isLoggedIn: $isLoggedIn)
+            }
         }
     }
 }
