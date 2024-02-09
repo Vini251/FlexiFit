@@ -1,8 +1,14 @@
-//
-//  AppDelegate.swift
-//  FlexiFit
-//
-//  Created by Vini Patel on 2/2/24.
-//
+import UIKit
+import FirebaseCore
 
-import Foundation
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+  var window: UIWindow?
+
+  func application(_ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions:
+                   [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    FirebaseApp.configure()
+    return true
+  }
+}
