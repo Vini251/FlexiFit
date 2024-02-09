@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B00A9D52B75C7AB0098DA51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B00A9D42B75C7AB0098DA51 /* ContentView.swift */; };
 		3B2734042B6D978000DDE1E0 /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2734032B6D978000DDE1E0 /* ScreenView.swift */; };
 		3B5C29F82B75C644005F50D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B5C29F72B75C644005F50D8 /* GoogleService-Info.plist */; };
 		3B9959B92B6DA32A00D53BCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9959B82B6DA32A00D53BCD /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B00A9D42B75C7AB0098DA51 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3B2734032B6D978000DDE1E0 /* ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenView.swift; sourceTree = "<group>"; };
 		3B5C29F72B75C644005F50D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B9959B82B6DA32A00D53BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				3B9959B82B6DA32A00D53BCD /* AppDelegate.swift */,
 				3BD1DAB72B6B2D8200C199E8 /* Assets.xcassets */,
 				3BD1DAB92B6B2D8200C199E8 /* Preview Content */,
+				3B00A9D42B75C7AB0098DA51 /* ContentView.swift */,
 			);
 			path = FlexiFit;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B9959B92B6DA32A00D53BCD /* AppDelegate.swift in Sources */,
+				3B00A9D52B75C7AB0098DA51 /* ContentView.swift in Sources */,
 				3BD1DAB62B6B2D8100C199E8 /* LoginView.swift in Sources */,
 				3B2734042B6D978000DDE1E0 /* ScreenView.swift in Sources */,
 				3BD1DAB42B6B2D8100C199E8 /* FlexiFitApp.swift in Sources */,
