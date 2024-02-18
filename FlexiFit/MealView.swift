@@ -10,6 +10,7 @@ import CoreData
 
 struct MealView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    //@EnvironmentObject var manager: HealthManager
     @State private var breakfastFood: String = ""
     @State private var breakfastCalories: String = ""
     @State private var lunchFood: String = ""
@@ -121,9 +122,6 @@ struct Meal: Identifiable, Hashable {
     let calories: Int
 }
 
-struct MealPreview: PreviewProvider {
-    static var previews: some View {
-        MealView()
-    }
+#Preview{
+    MealView()
 }
-

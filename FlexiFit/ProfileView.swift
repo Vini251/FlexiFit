@@ -10,6 +10,7 @@ import CoreData
 
 struct ProfileView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    //@EnvironmentObject var manager: HealthManager
     @Binding var isLoggedIn: Bool
     // Sample user data
     let userName = "John Doe"
@@ -79,31 +80,18 @@ struct ProfileView: View {
             .padding(.horizontal)
 
             Spacer()
-
-            // Logout button
-            Button(action: {
-                // Perform logout action here
-                // Example: Implement logout functionality
-                isLoggedIn = false
+            
+            NavigationLink(destination: LoginView()){
+                    LogoutButtonContent()
                 
-            }) {
-                Text("Log Out")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.red) // Customize button color
-                    .cornerRadius(10)
-                    .padding(.horizontal)
             }
+            
             .padding(.bottom, 20)
         }
         .padding()
     }
 }
 
-struct ProfilePreview: PreviewProvider {
-    static var previews: some View {
-        ProfileView(isLoggedIn: .constant(true))
-    }
+#Preview {
+    ProfileView(isLoggedIn: .constant(true))
 }

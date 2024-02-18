@@ -7,9 +7,15 @@
 
 import SwiftUI
 import CoreData
+import HealthKitUI
 
 struct DashboardView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    //@EnvironmentObject var manager: HealthManager
+    @State private var activitySummary = HKActivitySummary()
+    @State var percentage1: Double = 0
+    @State var percentage2: Double = 0
+    @State var percentage3: Double = 0
     
     var body: some View {
         VStack(alignment: .center, spacing: 50) {
@@ -18,10 +24,29 @@ struct DashboardView: View {
                 .fontWeight(.bold)
                 .padding(.top, 50)
                 .padding(.horizontal)
-            
-            ActivitySummaryRing()
-                .frame(width: 200, height: 200) // Adjust size as needed
-                .padding(.horizontal)
+        
+            ZStack {
+                RingView(lineWidth: 40, backgroundColor: Color.blue.opacity(0.2), foregroundColor: Color.blue, percentage: percentage1)
+                
+                .frame(width: 150, height: 150)
+                .onTapGesture {
+                    self.percentage1 = 20
+                }
+                
+                RingView(lineWidth: 40, backgroundColor: Color.green.opacity(0.2), foregroundColor: Color.green, percentage: percentage2)
+                
+                .frame(width: 230, height: 230)
+                .onTapGesture {
+                    self.percentage2 = 50
+                }
+                
+                RingView(lineWidth: 40, backgroundColor: Color.pink.opacity(0.2), foregroundColor: Color.pink, percentage: percentage3)
+                
+                .frame(width: 310, height: 310)
+                .onTapGesture {
+                    self.percentage3 = 80
+                }
+            }
             
             RecommendationsView()
                 .padding(.horizontal)
@@ -31,18 +56,6 @@ struct DashboardView: View {
     }
 }
 
-struct ActivitySummaryRing: View {
-    var body: some View {
-        ZStack {
-            // Circle in the middle
-            RoundedRectangle(cornerRadius: 100)
-                .frame(width: 200, height: 200)
-                .foregroundColor(.blue)
-            
-            // Add other elements as needed, such as text or icons
-        }
-    }
-}
 
 struct RecommendationsView: View {
     var body: some View {
@@ -66,8 +79,76 @@ struct RecommendationsView: View {
     }
 }
 
-struct DashboardPreview: PreviewProvider {
-    static var previews: some View {
-        DashboardView()
+struct RingView: View{
+    
+    let lineWidth: CGFloat
+    let backgroundColor: Color
+    let foregroundColor: Color
+    let percentage: Double
+    
+    var body: some View{
+        GeometryReader { geometery in
+            ZStack {
+                RingShape()
+                    .stroke(style: StrokeStyle(lineWidth: lineWidth))
+                    .fill(backgroundColor)
+                RingShape(percent: percentage)
+                    .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
+                    .fill(foregroundColor)
+            }
+            .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: 1)
+            .padding(lineWidth/2)
+        }
+        
     }
+}
+
+
+struct RingShape: Shape {
+    
+    var percent: Double
+    let startAngle: Double
+    
+    typealias AnimatableData = Double
+    var animatableData: Double{
+        get{
+            return percent
+        }
+        set{
+            percent = newValue
+        }
+    }
+    
+    init(percent: Double = 100, startAngle: Double = -90){
+        self.percent = percent
+        self.startAngle = startAngle
+    }
+        
+    static func percentToAngle(percent: Double, startAngle: Double) -> Double{
+        return (percent / 100 * 360) + startAngle
+    }
+        
+        
+    func path(in rect: CGRect) -> Path {
+        
+        let width = rect.width
+        let height = rect.height
+        let radius = min (height, width) / 2
+        let center = CGPoint(x: width / 2, y: height / 2)
+        
+        let endAngle = Self.percentToAngle(percent: percent, startAngle: startAngle)
+        return Path { path in
+            path.addArc (
+                center: center,
+                radius: radius,
+                startAngle: Angle(degrees: startAngle),
+                endAngle: Angle(degrees: endAngle),
+                clockwise: false
+            )
+        }
+    }
+}
+
+#Preview{
+    DashboardView()
 }
