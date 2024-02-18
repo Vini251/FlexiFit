@@ -10,7 +10,7 @@ import CoreData
 
 struct MealView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    //@EnvironmentObject var manager: HealthManager
+
     @State private var breakfastFood: String = ""
     @State private var breakfastCalories: String = ""
     @State private var lunchFood: String = ""

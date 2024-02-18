@@ -11,7 +11,7 @@ import HealthKitUI
 
 struct DashboardView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    //@EnvironmentObject var manager: HealthManager
+
     @State private var activitySummary = HKActivitySummary()
     @State var percentage1: Double = 0
     @State var percentage2: Double = 0

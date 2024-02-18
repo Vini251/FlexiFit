@@ -5,7 +5,6 @@ struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     //@Binding var isLoggedIn: Bool
-    @State private var healthStore = HealthManager()
     
     
     var body: some View {
@@ -50,9 +49,6 @@ struct LoginView: View {
                 }
                 
                 Spacer()
-        }
-        .task{
-            await healthStore.requestAuthorization()
         }
         .padding()
     }

@@ -10,7 +10,6 @@ import CoreData
 
 struct ProfileView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    //@EnvironmentObject var manager: HealthManager
     @Binding var isLoggedIn: Bool
     // Sample user data
     let userName = "John Doe"
