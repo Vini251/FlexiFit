@@ -56,7 +56,7 @@ class HealthManager{
     }
     
     
-    func fetchStepData() async throws {
+    func fetchStepData() async throws{
         guard let healthStore = self.healthStore else { return }
         
         //let calender = Calender(indentifier: .gregorian)
@@ -82,6 +82,88 @@ class HealthManager{
             }
         }
         
+    }
+    
+    func fetchHeightData() async throws {
+        guard let healthStore = self.healthStore else { return }
+
+        let heightType = HKQuantityType.quantityType(forIdentifier: .height)!
+        let query = HKStatisticsQuery(quantityType: heightType,
+                                      quantitySamplePredicate: nil,
+                                      options: .discreteAverage) { query, result, error in
+            guard let result = result, let averageHeight = result.averageQuantity() else {
+                if let error = error {
+                    print("Error fetching height data: \(error.localizedDescription)")
+                }
+                return
+            }
+            let heightInMeters = averageHeight.doubleValue(for: HKUnit.meter())
+            print("Average height: \(heightInMeters) meters")
+        }
+        
+        healthStore.execute(query)
+    }
+
+    func fetchWeightData() async throws {
+        guard let healthStore = self.healthStore else { return }
+
+        let weightType = HKQuantityType.quantityType(forIdentifier: .bodyMass)!
+        let query = HKStatisticsQuery(quantityType: weightType,
+                                      quantitySamplePredicate: nil,
+                                      options: .discreteAverage) { query, result, error in
+            guard let result = result, let averageWeight = result.averageQuantity() else {
+                if let error = error {
+                    print("Error fetching weight data: \(error.localizedDescription)")
+                }
+                return
+            }
+            let weightInKilograms = averageWeight.doubleValue(for: HKUnit.gramUnit(with: .kilo))
+            print("Average weight: \(weightInKilograms) kilograms")
+        }
+        
+        healthStore.execute(query)
+    }
+
+    // Function to fetch active calories
+    func fetchActiveCalories() async throws {
+        guard let healthStore = self.healthStore else { return }
+        let activeEnergyBurnedType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!
+        
+        let startDate = Calendar.current.startOfDay(for: Date())
+        let endDate = Date()
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+        let query = HKStatisticsQuery(quantityType: activeEnergyBurnedType, quantitySamplePredicate: predicate, options: .cumulativeSum) { query, statistics, error in
+            guard let statistics = statistics, error == nil else {
+                print("Error fetching active energy burned data: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            let activeCalories = statistics.sumQuantity()?.doubleValue(for: .kilocalorie()) ?? 0
+            print("Active calories burned: \(activeCalories)")
+        }
+        
+        healthStore.execute(query)
+    }
+    
+    // Function to fetch sleep time
+    func fetchSleepTime() async throws {
+        guard let healthStore = self.healthStore else { return }
+        let sleepType = HKCategoryType.categoryType(forIdentifier: .sleepAnalysis)!
+        
+        let startDate = Calendar.current.startOfDay(for: Date())
+        let endDate = Date()
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+        let query = HKSampleQuery(sampleType: sleepType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { query, samples, error in
+            guard let samples = samples as? [HKCategorySample], error == nil else {
+                print("Error fetching sleep time data: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            let sleepTime = samples.reduce(0.0) { $0 + $1.endDate.timeIntervalSince($1.startDate) }
+            print("Sleep time: \(sleepTime) seconds")
+        }
+        
+        healthStore.execute(query)
     }
 
 

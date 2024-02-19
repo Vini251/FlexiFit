@@ -44,6 +44,8 @@ struct ContentView: View {
             await healthStore.requestAuthorization()
             do {
                 try await healthStore.fetchStepData()
+                try await healthStore.fetchHeightData()
+                try await healthStore.fetchWeightData()
             } catch {
                 print(error)
             }

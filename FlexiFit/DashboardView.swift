@@ -16,6 +16,7 @@ struct DashboardView: View {
     @State var percentage1: Double = 0
     @State var percentage2: Double = 0
     @State var percentage3: Double = 0
+    @State private var healthStore = HealthManager()
     
     var body: some View {
         VStack(alignment: .center, spacing: 50) {
