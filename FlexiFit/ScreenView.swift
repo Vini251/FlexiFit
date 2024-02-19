@@ -42,6 +42,11 @@ struct ContentView: View {
         }
         .task{
             await healthStore.requestAuthorization()
+            do {
+                try await healthStore.fetchStepData()
+            } catch {
+                print(error)
+            }
         }
         .accentColor(.blue) // Change the color of selected tab
     }
