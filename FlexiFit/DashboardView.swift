@@ -30,23 +30,20 @@ struct DashboardView: View {
                 RingView(lineWidth: 40, backgroundColor: Color.blue.opacity(0.2), foregroundColor: Color.blue, percentage: percentage1)
                 
                 .frame(width: 150, height: 150)
-                .onTapGesture {
-                    self.percentage1 = 20
-                }
+                //Active Calories
                 
                 RingView(lineWidth: 40, backgroundColor: Color.green.opacity(0.2), foregroundColor: Color.green, percentage: percentage2)
                 
                 .frame(width: 230, height: 230)
-                .onTapGesture {
-                    self.percentage2 = 50
-                }
+                //Step Count
                 
                 RingView(lineWidth: 40, backgroundColor: Color.pink.opacity(0.2), foregroundColor: Color.pink, percentage: percentage3)
                 
                 .frame(width: 310, height: 310)
-                .onTapGesture {
-                    self.percentage3 = 80
-                }
+                //Sleep time
+            }
+            .onAppear {
+                fetchDataAndUpdatePercentage()
             }
             
             RecommendationsView()
@@ -55,7 +52,47 @@ struct DashboardView: View {
             Spacer()
         }
     }
+    
+    func fetchDataAndUpdatePercentage() {
+        Task {
+            do {
+                try await healthStore.fetchActiveCalories { activeCalories in
+                    DispatchQueue.main.async {
+                        self.percentage1 = activeCalories/500 * 100
+                    }
+                }
+                try await healthStore.fetchStepData { steps in
+                    DispatchQueue.main.async {
+                        // Calculate average step count from 'steps' array and update 'percentage2'
+                        self.percentage2 = calculateAverageStepCount(from: steps)/8000 * 100
+                    }
+                }
+                try await healthStore.fetchSleepTime { sleepTime in
+                    DispatchQueue.main.async {
+                        // Convert sleep time to percentage and update 'percentage3'
+                        self.percentage3 = convertSleepTimeToPercentage(sleepTime)
+                    }
+                }
+            } catch {
+                print("Error fetching data: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func calculateAverageStepCount(from steps: [Step]) -> Double {
+        // Calculate average step count from 'steps' array and return it
+        return steps.reduce(0.0) { $0 + Double($1.count) } / Double(steps.count)
+    }
+
+    func convertSleepTimeToPercentage(_ sleepTime: TimeInterval) -> Double {
+        // Convert sleep time to percentage and return it
+        // Adjust calculation as per your requirement
+        return (sleepTime / (8 * 3600)) * 100 // Assuming 8 hours of sleep as 100%
+    }
+
 }
+
+
 
 
 struct RecommendationsView: View {

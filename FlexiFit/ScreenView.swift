@@ -42,13 +42,6 @@ struct ContentView: View {
         }
         .task{
             await healthStore.requestAuthorization()
-            do {
-                try await healthStore.fetchStepData()
-                try await healthStore.fetchHeightData()
-                try await healthStore.fetchWeightData()
-            } catch {
-                print(error)
-            }
         }
         .accentColor(.blue) // Change the color of selected tab
     }

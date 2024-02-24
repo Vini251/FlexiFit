@@ -12,12 +12,23 @@ struct WelcomeView: View {
     var body: some View {
         NavigationView(){
             NavigationLink(destination: LoginView()){
-                LoginButtonContent()
+                WelcomeButton()
             }
         }
         
     }
     
+}
+
+struct WelcomeButton : View {
+    var body: some View {
+        return Text("Get Started")
+            .font(.headline)
+            .foregroundColor(.white)
+            .frame(width: 220, height: 40)
+            .background(Color.blue)
+            .cornerRadius(5.0)
+    }
 }
 
 struct LoginButtonContent : View {
