@@ -18,7 +18,7 @@ struct ProfileView: View {
     
     // Sample workout preferences
     let fitnessPreferences = ["Weight Loss", "Fat Loss", "Maintaining Weight"]
-    let workoutForms = ["Weight Lifting", "Cardio", "Run", "Walk", "Zumba"]
+    let workoutForms = ["Weight Lifting", "Cardio", "Run", "Walk"]
 
     @State private var selectedFitnessPreference = 0
     @State private var selectedWorkoutForm = 0

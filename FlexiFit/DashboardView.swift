@@ -42,8 +42,31 @@ struct DashboardView: View {
                 .frame(width: 310, height: 310)
                 //Sleep time
             }
+            VStack {
+                HStack {
+                    Circle()
+                        .fill(Color.blue)
+                        .frame(width: 20, height: 20)
+                    Text("Blue: Active Calories")
+                }
+                
+                HStack {
+                    Circle()
+                        .fill(Color.green)
+                        .frame(width: 20, height: 20)
+                    Text("Green: Step Count")
+                }
+                
+                HStack {
+                    Circle()
+                        .fill(Color.pink)
+                        .frame(width: 20, height: 20)
+                    Text("Pink: Sleep Time")
+                }
+            }
             .onAppear {
                 fetchDataAndUpdatePercentage()
+                
             }
             
             RecommendationsView()
@@ -64,30 +87,19 @@ struct DashboardView: View {
                 try await healthStore.fetchStepData { steps in
                     DispatchQueue.main.async {
                         // Calculate average step count from 'steps' array and update 'percentage2'
-                        self.percentage2 = calculateAverageStepCount(from: steps)/8000 * 100
+                        self.percentage2 = steps/8000 * 100
                     }
                 }
                 try await healthStore.fetchSleepTime { sleepTime in
                     DispatchQueue.main.async {
                         // Convert sleep time to percentage and update 'percentage3'
-                        self.percentage3 = convertSleepTimeToPercentage(sleepTime)
+                        self.percentage3 = (sleepTime/(8*3600)) * 100
                     }
                 }
             } catch {
                 print("Error fetching data: \(error.localizedDescription)")
             }
         }
-    }
-
-    func calculateAverageStepCount(from steps: [Step]) -> Double {
-        // Calculate average step count from 'steps' array and return it
-        return steps.reduce(0.0) { $0 + Double($1.count) } / Double(steps.count)
-    }
-
-    func convertSleepTimeToPercentage(_ sleepTime: TimeInterval) -> Double {
-        // Convert sleep time to percentage and return it
-        // Adjust calculation as per your requirement
-        return (sleepTime / (8 * 3600)) * 100 // Assuming 8 hours of sleep as 100%
     }
 
 }

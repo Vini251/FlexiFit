@@ -40,6 +40,7 @@
 		3B5C29F72B75C644005F50D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B65E1F12B81A24100C6824F /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		3B9959B82B6DA32A00D53BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3B9A806E2B894983008F2F19 /* FlexiFitRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlexiFitRelease.entitlements; sourceTree = "<group>"; };
 		3BC04AA52B82036A00D12C0F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		3BD1DAB32B6B2D8100C199E8 /* FlexiFitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexiFitApp.swift; sourceTree = "<group>"; };
 		3BD1DAB52B6B2D8100C199E8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 		3BD1DAB22B6B2D8100C199E8 /* FlexiFit */ = {
 			isa = PBXGroup;
 			children = (
+				3B9A806E2B894983008F2F19 /* FlexiFitRelease.entitlements */,
 				3BD1DAB32B6B2D8100C199E8 /* FlexiFitApp.swift */,
 				3BD1DAB52B6B2D8100C199E8 /* LoginView.swift */,
 				3B2734032B6D978000DDE1E0 /* ScreenView.swift */,
