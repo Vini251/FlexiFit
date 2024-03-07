@@ -41,7 +41,7 @@ struct LoginView: View {
                             .cornerRadius(8)
                     }
                     
-                    NavigationLink(destination: ContentView()){
+                    NavigationLink(destination: ContentView(userEmail: email)){
                         LoginButtonContent()
                         
                     }

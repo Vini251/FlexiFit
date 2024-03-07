@@ -10,6 +10,11 @@ struct ContentView: View {
     //@EnvironmentObject var manager: HealthManager
     @State private var healthStore = HealthManager()
     
+    let userEmail: String
+    init(userEmail: String) {
+        self.userEmail = userEmail
+    }
+    
     var body: some View {
         
         TabView(selection: $selectedTab) {
@@ -31,7 +36,7 @@ struct ContentView: View {
                 }
                 .tag(1)
             
-            ProfileView(isLoggedIn: .constant(true))
+            ProfileView(isLoggedIn: .constant(true), userEmail: userEmail)
                 .environment(\.managedObjectContext, viewContext)
                 //.environmentObject(manager)
                 .tabItem {
@@ -49,6 +54,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let userEmail = "vinip@uci.edu"
+        ContentView(userEmail: userEmail)
     }
 }
