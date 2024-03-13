@@ -18,7 +18,7 @@ struct ProfileView: View {
     
     // Sample workout preferences
     let fitnessPreferences = ["Weight Loss", "Fat Loss", "Maintaining Weight"]
-    let workoutForms = ["Weight Lifting", "Cardio", "Run", "Walk"]
+    let GymBool = ["Yes", "No"]
 
     @State private var selectedFitnessPreference = 0
     @State private var selectedWorkoutForm = 0
@@ -86,9 +86,9 @@ struct ProfileView: View {
                 .padding(.horizontal)
             
             // Scrollable menu for workout forms
-            Picker(selection: $selectedWorkoutForm, label: Text("Workout Form")) {
-                ForEach(0..<workoutForms.count, id: \.self) { index in
-                    Text(workoutForms[index]).tag(index)
+            Picker(selection: $selectedWorkoutForm, label: Text("Gym or No Gym")) {
+                ForEach(0..<GymBool.count, id: \.self) { index in
+                    Text(GymBool[index]).tag(index)
                 }
             }
             .pickerStyle(WheelPickerStyle())

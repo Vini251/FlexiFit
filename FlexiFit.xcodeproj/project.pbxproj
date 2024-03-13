@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B2F28832BA132B5001C42E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B5C29F72B75C644005F50D8 /* GoogleService-Info.plist */; };
 		3BE622FE2B82A64B003F45E7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B416FD42B81911300E0F50E /* ProfileView.swift */; };
 		3BE622FF2B82A64B003F45E7 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B65E1F12B81A24100C6824F /* HealthManager.swift */; };
 		3BE623002B82A64B003F45E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9959B82B6DA32A00D53BCD /* AppDelegate.swift */; };
@@ -26,7 +27,6 @@
 		3BE6230F2B82A64B003F45E7 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 3BE622FA2B82A64B003F45E7 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		3BE623112B82A64B003F45E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BD1DABA2B6B2D8200C199E8 /* Preview Assets.xcassets */; };
 		3BE623122B82A64B003F45E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BD1DAB72B6B2D8200C199E8 /* Assets.xcassets */; };
-		3BE623132B82A64B003F45E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B5C29F72B75C644005F50D8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -188,9 +188,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B2F28832BA132B5001C42E9 /* GoogleService-Info.plist in Resources */,
 				3BE623112B82A64B003F45E7 /* Preview Assets.xcassets in Resources */,
 				3BE623122B82A64B003F45E7 /* Assets.xcassets in Resources */,
-				3BE623132B82A64B003F45E7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
