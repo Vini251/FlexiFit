@@ -2,7 +2,7 @@
 
 **Contribution:**
 1. Frontend (UI and Client side): Vini Patel
-2. Backend (Recommendation Algorithm and Server side): Issac Texeria
+2. Backend (Recommendation Algorithm and Server side): Issac Texeira
 3. Firebase: Jason Ly
 4. Open Weather API: Sean Park
 
