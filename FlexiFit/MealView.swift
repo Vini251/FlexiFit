@@ -5,6 +5,7 @@
 //  Created by Vini Patel on 2/17/24.
 //
 
+import Foundation
 import SwiftUI
 import CoreData
 
@@ -19,6 +20,12 @@ struct MealView: View {
     @State private var snacksCalories: String = ""
     @State private var dinnerFood: String = ""
     @State private var dinnerCalories: String = ""
+    
+    let userEmail: String
+        
+    init(userEmail: String) {
+        self.userEmail = userEmail
+    }
     
     // Additional states for total calorie count and added meals
     @State private var totalCalories: Int = 0
@@ -104,6 +111,20 @@ struct MealView: View {
                 addedMeals.append(Meal(food: food.wrappedValue, calories: calorieInt))
                 // Update total calorie count
                 totalCalories += calorieInt
+            createStats(userEmail: userEmail,date: getCurrentDate()) { error in
+                if let error = error {
+                  print("Error creating Stats: \(error)")
+                } else {
+                  print("Stats created")
+              }
+            }
+            updateStatsForDate(userEmail: userEmail,date: getCurrentDate(), fieldName: "CaloriesConsumed",value: totalCalories) { error in
+                if let error = error {
+                    print("Error updating CaloriesConsumed: \(error)")
+                } else {
+                    print("CaloriesConsumed updated successfully")
+                }
+            }
                 // Clear text fields
                 food.wrappedValue = ""
                 calories.wrappedValue = ""
@@ -115,6 +136,7 @@ struct MealView: View {
     }
 }
 
+
 // Struct to represent a Meal
 struct Meal: Identifiable, Hashable {
     let id = UUID()
@@ -122,6 +144,10 @@ struct Meal: Identifiable, Hashable {
     let calories: Int
 }
 
-#Preview{
-    MealView()
+struct MealViewPreview: PreviewProvider {
+    static var previews: some View {
+        let userEmail = "vinip@uci.edu"
+        MealView(userEmail: userEmail)
+    }
 }
+

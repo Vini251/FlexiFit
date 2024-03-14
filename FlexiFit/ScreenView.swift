@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 import HealthKit
 import Firebase
@@ -8,17 +9,20 @@ struct ContentView: View {
     @State private var selectedTab = 0
     @Environment(\.managedObjectContext) private var viewContext
     //@EnvironmentObject var manager: HealthManager
-    @State private var healthStore = HealthManager()
+    @State private var healthStore: HealthManager
     
     let userEmail: String
     init(userEmail: String) {
         self.userEmail = userEmail
+        _healthStore = State(initialValue: HealthManager(userEmail: userEmail))
     }
+    
+    
     
     var body: some View {
         
         TabView(selection: $selectedTab) {
-            DashboardView()
+            DashboardView(userEmail: userEmail)
                 .environment(\.managedObjectContext, viewContext)
                 //.environmentObject(manager)
                 .tabItem {
@@ -27,7 +31,7 @@ struct ContentView: View {
                 }
                 .tag(0)
             
-            MealView()
+            MealView(userEmail: userEmail)
                 .environment(\.managedObjectContext, viewContext)
                 //.environmentObject(manager)
                 .tabItem {
@@ -58,3 +62,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView(userEmail: userEmail)
     }
 }
+

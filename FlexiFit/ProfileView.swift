@@ -5,20 +5,18 @@
 //  Created by Vini Patel on 2/17/24.
 //
 
+import Foundation
 import SwiftUI
 import CoreData
 
 struct ProfileView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Binding var isLoggedIn: Bool
-    // Sample user data
-    //let userName = "John Doe"
-    //let userEmail = "john.doe@example.com"
-    let lifestyleScore = 85 // Example lifestyle score
+    @State var lifestyleScore = 0
     
     // Sample workout preferences
     let fitnessPreferences = ["Weight Loss", "Fat Loss", "Maintaining Weight"]
-    let GymBool = ["Yes", "No"]
+    let GymBool = ["No", "Yes"]
 
     @State private var selectedFitnessPreference = 0
     @State private var selectedWorkoutForm = 0
@@ -33,9 +31,20 @@ struct ProfileView: View {
         self.userEmail = userEmail
     }
     
+//    createUser(userEmail: self.userEmail)
+//    updateUserInfo(userEmail: self.userEmail, fieldname: "Preference", value: selectedFitnessPreference)
+//    if selectedWorkoutForm == 1 {
+//        updateUserInfo(self.userEmail, "Gym",true)
+//    } else {
+//        updateUserInfo(self.userEmail, "Gym",false)
+//    }
+    
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
+            
+//            createUser(userEmail: self.userEmail)
+//            updateUserInfo(userEmail: self.userEmail, fieldname: "Preference", value: selectedFitnessPreference)
             Text("Profile")
                 .font(.title)
                 .fontWeight(.bold)
@@ -51,16 +60,26 @@ struct ProfileView: View {
             Text("Email: \(userEmail)")
                 .font(.headline)
                 .padding(.horizontal)
-
+            
             // Display user lifestyle score
             Text("Lifestyle Score: \(lifestyleScore)")
                 .font(.headline)
                 .padding(.horizontal)
-            
+
             // Display submitted city and state
             Text("Location: \(submittedCity), \(submittedState)")
                 .font(.headline)
                 .padding(.horizontal)
+                .onChange(of: submittedCity){ newValue in
+                    updateUserInfo(userEmail: self.userEmail, fieldName: "City",value: newValue){ error in
+                        if let error = error {
+                            print("Error updating user info: \(error)")
+                        } else {
+                            print("user info updated")
+                        }
+                    }
+                    
+                }
 
             //Spacer()
             
@@ -78,8 +97,24 @@ struct ProfileView: View {
             }
             .pickerStyle(WheelPickerStyle())
             .padding(.horizontal)
+            .onChange(of: selectedFitnessPreference) { newValue in
+                createUser(userEmail: self.userEmail){ error in
+                    if let error = error {
+                        print("Error creating user: \(error)")
+                    } else {
+                        print("user created")
+                    }
+                }
+                updateUserInfo(userEmail: self.userEmail, fieldName: "Preference", value: newValue){ error in
+                    if let error = error {
+                        print("Error updating user info: \(error)")
+                    } else {
+                        print("user info updated")
+                    }
+                }
+            }
             
-            Text("Workout Preference")
+            Text("Gym Preference")
                 .font(.subheadline)
                 .fontWeight(.bold)
                 //.padding(.top, 20)
@@ -93,6 +128,27 @@ struct ProfileView: View {
             }
             .pickerStyle(WheelPickerStyle())
             .padding(.horizontal)
+            .onChange(of: selectedWorkoutForm) { newValue in
+                if selectedWorkoutForm == 1 {
+                    updateUserInfo(userEmail: self.userEmail, fieldName: "Gym",value: true){ error in
+                        if let error = error {
+                            print("Error updating user info: \(error)")
+                        } else {
+                            print("user info updated")
+                        }
+                    }
+                } else {
+                    updateUserInfo(userEmail: self.userEmail, fieldName: "Gym",value: false){ error in
+                        if let error = error {
+                            print("Error updating user info: \(error)")
+                        } else {
+                            print("user info updated")
+                        }
+                    }
+                }
+            }
+            
+            
 
             //Spacer()
             
@@ -112,6 +168,8 @@ struct ProfileView: View {
                     // Update submitted city and state
                     submittedCity = city
                     submittedState = state
+                    
+                    
                 }) {
                     Text("Submit")
                         .padding()
@@ -125,16 +183,48 @@ struct ProfileView: View {
             //.padding(.top, 20)
             .padding(.horizontal)
             
-            
             NavigationLink(destination: LoginView()){
                     LogoutButtonContent()
                 
             }
             
-            //.padding(.bottom, 20)
         }
         .padding()
+        .onAppear(){
+            fetchLifestyleScore()
+        }
+        
     }
+    
+    func fetchLifestyleScore(){
+        let statsRef = db.collection("User").document(userEmail).collection("Stats").document(getCurrentDate())
+
+        createStats(userEmail: userEmail, date: getCurrentDate()) { error in
+            if let error = error {
+                print("Error creating Stats: \(error)")
+            } else {
+                print("Stats created")
+            }
+        }
+
+        statsRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error fetching document: \(error)")
+            } else if let document = document, document.exists {
+                if let score = document.data()?["Score"] as? Double {
+                    DispatchQueue.main.async {
+                        self.lifestyleScore = Int(score)
+                    }
+                    print("Lifestyle score: \(lifestyleScore)")
+                } else {
+                    print("Score field does not exist in the document")
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+
 }
 
 //#Preview {

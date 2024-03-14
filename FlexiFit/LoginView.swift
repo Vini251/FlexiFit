@@ -1,5 +1,5 @@
 import SwiftUI
-
+import Foundation
 
 struct LoginView: View {
     @State private var email: String = ""
@@ -30,6 +30,7 @@ struct LoginView: View {
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(7)
                     }
+
                     
                     // Password Input Field
                     HStack {
@@ -40,9 +41,13 @@ struct LoginView: View {
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(8)
                     }
+                    //LoginButtonContent()
                     
                     NavigationLink(destination: ContentView(userEmail: email)){
                         LoginButtonContent()
+//                            .onTapGesture {
+//                                login()
+//                            }
                         
                     }
                     .padding(.horizontal)
@@ -52,6 +57,9 @@ struct LoginView: View {
         }
         .padding()
     }
+
+
+
 }
 
 #Preview{

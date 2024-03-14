@@ -5,6 +5,7 @@
 //  Created by Vini Patel on 2/18/24.
 //
 
+import Foundation
 import SwiftUI
 import HealthKit
 
