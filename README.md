@@ -1,5 +1,13 @@
 # FlexiFit
 
+**Contribution:**
+1. Frontend (UI and Client side): Vini Patel
+2. Backend (Recommendation Algorithm and Server side): Issac Texeria
+3. Firebase: Jason Ly
+4. Open Weather API: Sean Park
+
+
+
 **Goals:**
 Our iOS system will recommend workouts based upon the user’s meal history, physical statistics, and lifestyle goals. Data will be taken from the Health App using the HealthKit API. OpenWeather’s API will be used as a contextual data source to inform workout recommendations. Data retrieved from the user will be stored in a database. The user will be asked to provide their personal information when they first launch the application, including their height, weight, and food preference. The user’s meals will be tracked with regular prompts about what they ate, what they drank, and their level of satisfaction.
 
@@ -32,16 +40,17 @@ Our iOS system will recommend workouts based upon the user’s meal history, phy
 * Develop workout recommendation algorithms based on meals, activity and sleep. This step needs to implement a ML/AI algorithm.
 
 **Login Screen**
-<img width="436" alt="Login" src="https://github.com/Vini251/FlexiFit/assets/80379653/cd861764-e36b-456e-b79d-def51a4a58d2">
+<img width="315" alt="login" src="https://github.com/Vini251/FlexiFit/assets/80379653/48603af5-3f46-46d6-a152-39f8ea3d1862">
 
 **Dashboard:**
-<img width="436" alt="Dashboard" src="https://github.com/Vini251/FlexiFit/assets/80379653/c845d777-1eea-4c4e-9146-8287692dda8e">
+<img width="315" alt="dashboard" src="https://github.com/Vini251/FlexiFit/assets/80379653/e4de407a-b776-426b-bbcc-ff4e98f85790">
 
 **Meal:**
-<img width="436" alt="Meal" src="https://github.com/Vini251/FlexiFit/assets/80379653/c0e5bb4f-a12c-4b2e-8761-033e3cc0bccc">
+<img width="315" alt="image" src="https://github.com/Vini251/FlexiFit/assets/80379653/cff6878a-3c50-474a-b71e-963b212dbe13">
 
 **Profile:**
-<img width="436" alt="Profile" src="https://github.com/Vini251/FlexiFit/assets/80379653/63fe2b00-180b-4a00-be74-0f354cfe2772">
+<img width="315" alt="profile" src="https://github.com/Vini251/FlexiFit/assets/80379653/939b335d-e51e-4843-902a-08794e17117b">
+
 
 
 
